@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Games</title>
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='style.css') }}>
+</head>
+<body>
+
+<a href="{{ url_for('snake_game')}}" id="snake" class="button">SNAKE</a>
+
+<a href="{{ url_for('memory_game')}}" id="memory" class="button">MEMORY</a>
+
+<a href="{{ url_for('puzzle_game')}}" id="puzzle" class="button">PUZZLE</a>
+
+</body>
+</html>
