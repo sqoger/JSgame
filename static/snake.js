@@ -8,6 +8,28 @@ let newSegments = 0
 let inputDirection = {x: 0, y: 0}
 let lastInputDirection = {x: 0, y: 0}
 
+
+function main(currentTime) {
+    let score = snakeBody.length
+    console.log(score)
+    if(gameOver) {
+        if(confirm("Score: " + score)) {
+            location.reload()
+        }
+        return
+    }
+    window.requestAnimationFrame(main);
+    const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
+    if (secondsSinceLastRender < 1 / SPEED) return;
+    lastRenderTime = currentTime;
+
+    updateBoard()
+    drawBoard()
+
+}
+
+window.requestAnimationFrame(main)
+
 window.addEventListener('keydown', event => {
     switch (event.key) {
         case 'ArrowUp':
@@ -87,27 +109,6 @@ function snakeIntersection() {
 function getSnakeHead() {
     return snakeBody[0]
 }
-
-function main(currentTime) {
-    let score = snakeBody.length
-    console.log(score)
-    if(gameOver) {
-        if(confirm("You lost. Your score:" + score + "Press okay to restart.")) {
-            location.reload()
-        }
-        return
-    }
-    window.requestAnimationFrame(main);
-    const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
-    if (secondsSinceLastRender < 1 / SPEED) return;
-    lastRenderTime = currentTime;
-
-    updateBoard()
-    drawBoard()
-
-}
-
-window.requestAnimationFrame(main)
 
 
 function updateBoard() {

@@ -23,6 +23,7 @@ body {
 }
 
 #game-board {
+    border: 1rem solid white;
     background-color: #fff4cf;
     width: 30rem;
     height: 30rem;
@@ -35,11 +36,11 @@ body {
 
 .snake {
     background-color: #24a50f;
-    border: .25vmin solid black;
+    border: 0.05rem dotted black;
 }
 
 .food {
+    background-image: url("apple.png");
     background-color: red;
     border-radius: 2rem;
-    border: .25vmin solid black;
 }
