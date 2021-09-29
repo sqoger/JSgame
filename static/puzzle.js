@@ -81,7 +81,7 @@ function canDropHere(e) {
 function hasWon() {
     if (checkIsBoxEmpty()) {
         if (arePositionsCorrect()) {
-            alert("You won!");
+            alert("You won! Time: " + minutes.innerHTML + ":" + seconds.innerHTML);
             endCounting();
         }
     }
