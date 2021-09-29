@@ -33,7 +33,8 @@ def memory_game():
 
 @app.route('/puzzle')
 def puzzle_game():
-    pass
+    directory = "cat"
+    return render_template('puzzle.html', directory=directory)
 
 
 if __name__ == "__main__":

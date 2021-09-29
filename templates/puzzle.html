@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style-puzzle.css') }}">
+    <script src="static/puzzle.js" defer></script>
+</head>
+<body>
+    <div class="text">Puzzle game</div><br>
+    <div class="time text">time:
+        <span id="minutes">00</span>:<span id="seconds">00</span>
+    </div><br>
+    <div class="position">
+        <button class="button" onclick="startCounting()">Start</button>
+    </div>
+
+    <div class="game">
+        <div class="puzzle-board">
+            {% for i in range(16) %}
+                <div class="puzzle-slot drop-zone" ></div>
+            {% endfor %}
+        </div><br>
+        <div class="puzzle-mixed drop-zone" >
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_001.jpg" alt="1"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_002.jpg" alt="2"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_003.jpg" alt="3"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_004.jpg" alt="4"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_005.jpg" alt="5"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_006.jpg" alt="6"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_007.jpg" alt="7"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_008.jpg" alt="8"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_009.jpg" alt="9"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_010.jpg" alt="10"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_011.jpg" alt="11"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_012.jpg" alt="12"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_013.jpg" alt="13"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_014.jpg" alt="14"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_015.jpg" alt="15"/></div>
+            <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_016.jpg" alt="16"/></div>
+        </div>
+    </div>
+</body>
+</html>
