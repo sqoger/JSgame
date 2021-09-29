@@ -55,8 +55,8 @@ body {
 }
 
 #game-board {
-    border: 1rem solid white;
-    background-color: #fff4cf;
+    border: 1rem solid #615f5f;
+    background-color: #e7e3d7;
     width: 27rem;
     height: 27rem;
     display: grid;
@@ -74,4 +74,8 @@ body {
     background-image: url("apple.png");
     background-color: red;
     border-radius: 2rem;
+}
+
+#score {
+    margin-left: 40%;
 }

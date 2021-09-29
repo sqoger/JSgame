@@ -10,7 +10,8 @@ let lastInputDirection = {x: 0, y: 0}
 
 
 function main(currentTime) {
-    let score = snakeBody.length
+    let score = snakeBody.length - 1
+    document.getElementById("score").innerHTML = ("Score: " + score);
     console.log(score)
     if(gameOver) {
         if(confirm("Score: " + score)) {
