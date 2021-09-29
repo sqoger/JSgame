@@ -3,6 +3,18 @@ from flask import Flask, request, redirect, render_template, url_for
 app = Flask(__name__, static_folder="static")
 
 
+@app.route('/getmethod/<jsdata>')
+def get_javascript_data(jsdata):
+    print(jsdata)
+    return jsdata
+
+
+@app.route('/postmethod', methods = ['POST'])
+def get_post_javascript_data():
+    jsdata = request.form['javascript_data']
+    return jsdata
+
+
 @app.route('/')
 @app.route('/index')
 def main_page():
