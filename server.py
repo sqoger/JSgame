@@ -28,7 +28,7 @@ def snake_game():
 
 @app.route('/memory')
 def memory_game():
-    pass
+    return render_template('memory.html')
 
 
 @app.route('/puzzle')
