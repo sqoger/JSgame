@@ -137,5 +137,17 @@ function convertIntoString(value) {
 }
 
 function endCounting() {
-    clearInterval(counting)
+    clearInterval(counting);
+}
+
+function saveResult() {
+    let positionNumber = 1;
+    let name = prompt("Please enter your name/nick: ");
+    let scoresList = document.querySelector("#scores-list");
+    let paragraph = document.createElement("p");
+    let content = document.createTextNode(positionNumber + ". " + name + ": " + minutes.innerHTML + ":" + seconds.innerHTML);
+    paragraph.appendChild(content);
+    paragraph.classList.add("text");
+    paragraph.classList.add("each-score")
+    scoresList.appendChild(paragraph);
 }

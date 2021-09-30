@@ -79,3 +79,13 @@
   justify-content: center;
   align-items: center;
 }
+
+.scores {
+    font-size: 20px;
+    text-align: left;
+}
+
+.each-score {
+    font-size: 15px;
+    text-align: left;
+}

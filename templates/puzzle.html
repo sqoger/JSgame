@@ -13,6 +13,7 @@
     </div><br>
     <div class="position">
         <button class="button" onclick="startCounting()">Start</button>
+        <button class="button" onclick="saveResult()">Save</button>
     </div>
 
     <div class="game">
@@ -38,6 +39,11 @@
             <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_014.jpg" alt="14"/></div>
             <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_015.jpg" alt="15"/></div>
             <div class="part" ><img src="static/puzzle/{{ directory }}/image_part_016.jpg" alt="16"/></div>
+        </div>
+        <div>
+            <br><hr>
+            <p class="text scores">Best scores:</p>
+            <div id="scores-list"></div>
         </div>
     </div>
 </body>
