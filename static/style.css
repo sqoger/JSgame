@@ -37,7 +37,7 @@ a {
     background-color: white;
 }
 
-#real_body {
+#content {
     display: flex;
     justify-content: center;
     align-items: center;

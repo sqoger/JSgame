@@ -1,17 +1,18 @@
+const SIZE = 20
 let lastRenderTime = 0
 let gameOver = false
 const gameBoard = document.getElementById('game-board')
 
-let SPEED = 5
+let speed = 5
 const snakeBody = [{x: 10, y: 10}]
 let newSegments = 0
 let inputDirection = {x: 0, y: 0}
 let lastInputDirection = {x: 0, y: 0}
 
 
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("myModal");
+let btn = document.getElementById("myBtn");
+let span = document.getElementsByClassName("close")[0];
 btn.onclick = function() {
   modal.style.display = "block";
 }
@@ -29,19 +30,15 @@ function main(currentTime) {
     let score = snakeBody.length - 1
     document.getElementById("score").innerHTML = ("Score: " + score);
     if(gameOver) {
-        if(confirm("Score: " + score)) {
+        if(confirm("Score: " + score + "\nPress 'OK' to play again.")) {
             location.reload()
         }
-        return
     }
     window.requestAnimationFrame(main);
     const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
-    if (secondsSinceLastRender < 1 / SPEED) return;
+    if (secondsSinceLastRender < 1 / speed) return;
     lastRenderTime = currentTime;
-
     updateBoard()
-    drawBoard()
-
 }
 
 window.requestAnimationFrame(main)
@@ -84,7 +81,7 @@ function updateSnake() {
 }
 
 
-function drawSnake(gameBoard) {
+function putSnakeOnBoard(gameBoard) {
     snakeBody.forEach(segment => {
         const snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = segment.y;
@@ -98,20 +95,9 @@ function drawSnake(gameBoard) {
 function onSnake(position, {ignoreHead = false} = {}) {
     return snakeBody.some((segment, index) => {
         if(ignoreHead && index === 0) return false
-        return equalPositions(segment, position)
+        return segment.x === position.x && segment.y === position.y
     } )
 }
-
-function equalPositions(pos1, pos2) {
-    return (pos1.x === pos2.x && pos1.y === pos2.y)
-}
-
-function expandSnake(amount) {
-    newSegments += amount
-    SPEED += 0.15
-    console.log(SPEED)
-}
-
 
 function addSegments() {
     for(let i = 0; i < newSegments; i++) {
@@ -120,60 +106,41 @@ function addSegments() {
     newSegments = 0
 }
 
-function snakeIntersection() {
-    return onSnake(snakeBody[0], {ignoreHead: true})
-}
-
-function getSnakeHead() {
-    return snakeBody[0]
-}
-
 
 function updateBoard() {
     updateSnake()
     updateFood()
-    gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
-}
-
-
-function drawBoard() {
+    gameOver = outsideGrid(snakeBody[0]) || onSnake(snakeBody[0], {ignoreHead: true})
     gameBoard.innerHTML = ''
-    drawSnake(gameBoard)
-    drawFood(gameBoard)
+    putSnakeOnBoard(gameBoard)
+    putAppleOnBoard(gameBoard)
 }
 
-
-
-
-const GRID_SIZE = 20
-
-function randomGridPosition() {
+function randomPosition() {
   return {
-    x: Math.floor(Math.random() * GRID_SIZE) + 1,
-    y: Math.floor(Math.random() * GRID_SIZE) + 1
+    x: Math.floor(Math.random() * SIZE) + 1,
+    y: Math.floor(Math.random() * SIZE) + 1
   }
 }
 
 function outsideGrid(position) {
   return (
-    position.x < 1 || position.x > GRID_SIZE ||
-    position.y < 1 || position.y > GRID_SIZE
+    position.x < 1 || position.x > SIZE ||
+    position.y < 1 || position.y > SIZE
   )
 }
 
-
 let food = getRandomFoodPosition()
-const EXPANSION_RATE = 1
-
 function updateFood() {
     if(onSnake(food)) {
-        expandSnake(EXPANSION_RATE);
+        newSegments += 1
+        speed += 0.15
         food = getRandomFoodPosition()
     }
 }
 
 
-function drawFood(gameBoard) {
+function putAppleOnBoard(gameBoard) {
         const foodElement = document.createElement('div');
         foodElement.style.gridRowStart = food.y;
         foodElement.style.gridColumnStart = food.x;
@@ -183,9 +150,9 @@ function drawFood(gameBoard) {
 
 
 function getRandomFoodPosition() {
-  let newFoodPosition = null
-  while (newFoodPosition == null || onSnake(newFoodPosition)) {
-    newFoodPosition = randomGridPosition()
+  let newPosition = null
+  while (newPosition == null || onSnake(newPosition)) {
+    newPosition = randomPosition()
   }
-  return newFoodPosition
+  return newPosition
 }
