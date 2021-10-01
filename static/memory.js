@@ -73,14 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let cardsChosen = []
     let cardsChosenId = []
     let cardsWon = []
+    let score = document.querySelector('#result')
+    let scoreNum = 0
 
     function flipCard(){
+        if (this.getAttribute('src', '../static/images/questionmark.png') === '../static/images/questionmark.png' ) {
         let cardId = this.getAttribute('data-id')
         cardsChosen.push(cardArray[cardId].name)
         cardsChosenId.push(cardId)
         this.setAttribute('src', cardArray[cardId].img)
+        }
         if (cardsChosen.length === 2) {
             setTimeout(checkForMatch, 250)
+            scoreNum = scoreNum + 1
+            score.textContent = scoreNum
         }
     }
 
@@ -88,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < cardArray.length; i++){
             let card = document.createElement('img')
             card.setAttribute('src', '../static/images/questionmark.png')
-            //todo SET QUESTIONMARK TO CLICKABLE - ATTRIBUTE
             card.setAttribute('data-id', i)
             card.addEventListener('click', flipCard)
             grid.appendChild(card)
@@ -110,8 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChosen = []
         cardsChosenId = []
 
-    //TODO - WIN STATEMENT WHEN ALL IMAGES ARE CONFETTI
-    //TODO - COUNT FLIPS AS SCORE, SAVE TO DATABASE WITH USERNAME
+        if (cardsWon.length === cardArray.length/2){
+            setTimeout(flipCard, 1000)
+            alert('you won!')
+        }
+    // todo - save users score in one session
     }
     createBoard()
 

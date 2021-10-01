@@ -9,29 +9,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../static/memory.js" charset="utf-8"></script>
     <title>Memory Game</title>
-    <link rel="stylesheet" type= "text/css" href= "../static/style.css">
+    <link rel="stylesheet" type= "text/css" href= "../static/memory.css">
 </head>
 <body>
+    <div class="top">
+    <a href="/" class="simple_button">Main Page</a>
+    <button class="simple_button" id="myBtn">Rules</button>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+          <h1>Rules</h1>
+          <p>Uncover two cards by clicking on them.</p>
+          <p>If the cards match, you get a point.</p>
+          <p>Repeat until you have collected all of the cards.</p>
+          <p>A point is added to your score every two flips, the less the better.</p>
+      </div>
+    </div>
 
-<div class="top">
-<button class="rules" id="myBtn">Rules</button>
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-      <h2>RULES</h2>
-      <p>Uncover two cards by clicking on them.</p>
-      <p>If the cards match, you get a point.</p>
-      <p>Repeat until you have collected all of the cards.</p>
-  </div>
+
 
 </div>
-
-    <span id="score"></span>
-    <span class="right"><a href="/">MAIN PAGE</a></span>
-</div>
-    <br>
-    <h1 style = "text-align: center;">Memory Game</h1>
-    <br>
+    <h1>Memory Game</h1>
+        <span id="score"></span>
+        <h2>Score: <span id="result"></span></h2>
     <div class="container">
         <div class="grid-memory">
         </div>
