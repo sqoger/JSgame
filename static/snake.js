@@ -52,7 +52,10 @@ function getInputDirection() {
 }
 
 function updateSnake() {
-    addSegments()
+    for(let i = 0; i < newSegments; i++) {
+       snakeBody.push({...snakeBody[snakeBody.length - 1]})
+    }
+    newSegments = 0
     const inputDirection = getInputDirection()
     for (let i = snakeBody.length - 2; i >= 0; i--) {
         snakeBody[i+1] = {...snakeBody[i]}
@@ -61,12 +64,11 @@ function updateSnake() {
     snakeBody[0].y += inputDirection.y
 }
 
-
 function putSnakeOnBoard(gameBoard) {
-    snakeBody.forEach(segment => {
+    snakeBody.forEach(element => {
         const snakeElement = document.createElement('div');
-        snakeElement.style.gridRowStart = segment.y;
-        snakeElement.style.gridColumnStart = segment.x;
+        snakeElement.style.gridRowStart = element.y;
+        snakeElement.style.gridColumnStart = element.x;
         snakeElement.classList.add("snake")
         gameBoard.appendChild(snakeElement);
     })
@@ -77,13 +79,6 @@ function onSnake(position, {ignoreHead = false} = {}) {
         if(ignoreHead && index === 0) return false
         return segment.x === position.x && segment.y === position.y
     } )
-}
-
-function addSegments() {
-    for(let i = 0; i < newSegments; i++) {
-       snakeBody.push({...snakeBody[snakeBody.length - 1]})
-    }
-    newSegments = 0
 }
 
 function updateBoard() {
@@ -106,6 +101,14 @@ function outsideGrid(position) {
   return position.x < 1 || position.x > SIZE || position.y < 1 || position.y > SIZE
 }
 
+function getRandomFoodPosition() {
+  let newPosition = null
+  while (newPosition == null || onSnake(newPosition)) {
+    newPosition = randomPosition()
+  }
+  return newPosition
+}
+
 let food = getRandomFoodPosition()
 function updateFood() {
     if(onSnake(food)) {
@@ -121,14 +124,6 @@ function putAppleOnBoard(gameBoard) {
         apple.style.gridColumnStart = food.x;
         apple.classList.add("apple");
         gameBoard.appendChild(apple);
-}
-
-function getRandomFoodPosition() {
-  let newPosition = null
-  while (newPosition == null || onSnake(newPosition)) {
-    newPosition = randomPosition()
-  }
-  return newPosition
 }
 
 let modal = document.getElementById("myModal");
