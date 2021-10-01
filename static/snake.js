@@ -1,30 +1,12 @@
 const SIZE = 20
-let lastRenderTime = 0
 let gameOver = false
 const gameBoard = document.getElementById('game-board')
-
 let speed = 5
+let direction = {x: 0, y: 0}
+let lastDirection = {x: 0, y: 0}
 const snakeBody = [{x: 10, y: 10}]
 let newSegments = 0
-let inputDirection = {x: 0, y: 0}
-let lastInputDirection = {x: 0, y: 0}
-
-
-let modal = document.getElementById("myModal");
-let btn = document.getElementById("myBtn");
-let span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-}
-
+let lastRenderTime = 0
 
 function main(currentTime) {
     let score = snakeBody.length - 1
@@ -46,29 +28,28 @@ window.requestAnimationFrame(main)
 window.addEventListener('keydown', event => {
     switch (event.key) {
         case 'ArrowLeft':
-            if (lastInputDirection.x !== 0) break
-            inputDirection = {x: -1, y: 0}
+            if (lastDirection.x !== 0) break
+            direction = {x: -1, y: 0}
             break
         case 'ArrowRight':
-            if (lastInputDirection.x !== 0) break
-            inputDirection = {x: 1, y: 0}
+            if (lastDirection.x !== 0) break
+            direction = {x: 1, y: 0}
             break
         case 'ArrowUp':
-            if (lastInputDirection.y !== 0) break
-            inputDirection = {x: 0, y: -1}
+            if (lastDirection.y !== 0) break
+            direction = {x: 0, y: -1}
             break
         case 'ArrowDown':
-            if (lastInputDirection.y !== 0) break
-            inputDirection = {x: 0, y: 1}
+            if (lastDirection.y !== 0) break
+            direction = {x: 0, y: 1}
             break
     }
 })
 
 function getInputDirection() {
-    lastInputDirection = inputDirection
-    return inputDirection
+    lastDirection = direction
+    return direction
 }
-
 
 function updateSnake() {
     addSegments()
@@ -91,7 +72,6 @@ function putSnakeOnBoard(gameBoard) {
     })
 }
 
-
 function onSnake(position, {ignoreHead = false} = {}) {
     return snakeBody.some((segment, index) => {
         if(ignoreHead && index === 0) return false
@@ -105,7 +85,6 @@ function addSegments() {
     }
     newSegments = 0
 }
-
 
 function updateBoard() {
     updateSnake()
@@ -124,10 +103,7 @@ function randomPosition() {
 }
 
 function outsideGrid(position) {
-  return (
-    position.x < 1 || position.x > SIZE ||
-    position.y < 1 || position.y > SIZE
-  )
+  return position.x < 1 || position.x > SIZE || position.y < 1 || position.y > SIZE
 }
 
 let food = getRandomFoodPosition()
@@ -139,15 +115,13 @@ function updateFood() {
     }
 }
 
-
 function putAppleOnBoard(gameBoard) {
-        const foodElement = document.createElement('div');
-        foodElement.style.gridRowStart = food.y;
-        foodElement.style.gridColumnStart = food.x;
-        foodElement.classList.add("food");
-        gameBoard.appendChild(foodElement);
+        const apple = document.createElement('div');
+        apple.style.gridRowStart = food.y;
+        apple.style.gridColumnStart = food.x;
+        apple.classList.add("apple");
+        gameBoard.appendChild(apple);
 }
-
 
 function getRandomFoodPosition() {
   let newPosition = null
@@ -155,4 +129,19 @@ function getRandomFoodPosition() {
     newPosition = randomPosition()
   }
   return newPosition
+}
+
+let modal = document.getElementById("myModal");
+let btn = document.getElementById("myBtn");
+let span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
 }
