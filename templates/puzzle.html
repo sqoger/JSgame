@@ -11,11 +11,7 @@
     <div class="time text">time:
         <span id="minutes">00</span>:<span id="seconds">00</span>
     </div><br>
-    <div class="position">
-        <button class="button" onclick="startCounting()">Start</button>
-        <button class="button" onclick="saveResult()">Save</button>
-    </div>
-
+    <div class="button-position"></div>
     <div class="game">
         <div class="puzzle-board">
             {% for i in range(16) %}
@@ -42,7 +38,7 @@
         </div>
         <div>
             <br><hr>
-            <p class="text scores">Best scores:</p>
+            <p class="text scores">Scores:</p>
             <div id="scores-list"></div>
         </div>
     </div>
