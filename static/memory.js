@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < cardArray.length; i++){
             let card = document.createElement('img')
             card.setAttribute('src', '../static/images/questionmark.png')
+            //todo SET QUESTIONMARK TO CLICKABLE - ATTRIBUTE
             card.setAttribute('data-id', i)
             card.addEventListener('click', flipCard)
             grid.appendChild(card)
@@ -108,6 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         cardsChosen = []
         cardsChosenId = []
+
+    //TODO - WIN STATEMENT WHEN ALL IMAGES ARE CONFETTI
+    //TODO - COUNT FLIPS AS SCORE, SAVE TO DATABASE WITH USERNAME
     }
     createBoard()
 
