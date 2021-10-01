@@ -2,22 +2,11 @@ let lastRenderTime = 0
 let gameOver = false
 const gameBoard = document.getElementById('game-board')
 
-const SPEED = 5
+let SPEED = 5
 const snakeBody = [{x: 10, y: 10}]
 let newSegments = 0
 let inputDirection = {x: 0, y: 0}
 let lastInputDirection = {x: 0, y: 0}
-
-
-let levelModal = document.getElementById("level")
-
-document.addEventListener('DOMContentLoaded', function() {
-    levelModal.style.display = "block";
-}, false);
-
-window.onload = function() {
-    levelModal.style.display = "block";
-}
 
 
 var modal = document.getElementById("myModal");
@@ -30,7 +19,7 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target === modal) {
     modal.style.display = "none";
   }
 }
@@ -39,7 +28,6 @@ window.onclick = function(event) {
 function main(currentTime) {
     let score = snakeBody.length - 1
     document.getElementById("score").innerHTML = ("Score: " + score);
-    console.log(score)
     if(gameOver) {
         if(confirm("Score: " + score)) {
             location.reload()
@@ -60,14 +48,6 @@ window.requestAnimationFrame(main)
 
 window.addEventListener('keydown', event => {
     switch (event.key) {
-        case 'ArrowUp':
-            if (lastInputDirection.y !== 0) break
-            inputDirection = {x: 0, y: -1}
-            break
-        case 'ArrowDown':
-            if (lastInputDirection.y !== 0) break
-            inputDirection = {x: 0, y: 1}
-            break
         case 'ArrowLeft':
             if (lastInputDirection.x !== 0) break
             inputDirection = {x: -1, y: 0}
@@ -75,6 +55,14 @@ window.addEventListener('keydown', event => {
         case 'ArrowRight':
             if (lastInputDirection.x !== 0) break
             inputDirection = {x: 1, y: 0}
+            break
+        case 'ArrowUp':
+            if (lastInputDirection.y !== 0) break
+            inputDirection = {x: 0, y: -1}
+            break
+        case 'ArrowDown':
+            if (lastInputDirection.y !== 0) break
+            inputDirection = {x: 0, y: 1}
             break
     }
 })
@@ -120,6 +108,8 @@ function equalPositions(pos1, pos2) {
 
 function expandSnake(amount) {
     newSegments += amount
+    SPEED += 0.15
+    console.log(SPEED)
 }
 
 
@@ -142,7 +132,7 @@ function getSnakeHead() {
 function updateBoard() {
     updateSnake()
     updateFood()
-    checkDeath()
+    gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
 }
 
 
@@ -150,12 +140,9 @@ function drawBoard() {
     gameBoard.innerHTML = ''
     drawSnake(gameBoard)
     drawFood(gameBoard)
-
 }
 
-function checkDeath() {
-  gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
-}
+
 
 
 const GRID_SIZE = 20

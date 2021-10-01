@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cardArray.sort(() => 0.5 - Math.random())
 
-    let grid = document.querySelector('.grid')
+    let grid = document.querySelector('.grid-memory')
     let cardsChosen = []
     let cardsChosenId = []
     let cardsWon = []
@@ -109,9 +109,24 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChosen = []
         cardsChosenId = []
     }
-
-
-
     createBoard()
 
+
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+}
+
 })
+
+

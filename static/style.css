@@ -113,3 +113,125 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+.grid-memory {
+    display: flex;
+    flex-wrap: wrap;
+    height:600px;
+    width:600px;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: rgb(232, 232, 252);
+    border-radius: 10%;
+    align-self:center;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    padding: 0.5rem;
+    height: 125px;
+    width: 125px;
+}
+
+h1{
+    font-family: 'Mukta', sans-serif;
+    color: white;
+}
+
+.right {
+    float: right;
+    margin-top: 1rem;
+    margin-right: 2rem;
+}
+
+.text {
+    font-family: 'Lucida Console', sans-serif;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #2E483F;
+}
+
+.time {
+    font-size: 30px;
+}
+
+.puzzle-board {
+    margin:2px auto;
+    position: relative;
+    overflow: hidden;
+    width: 410px;
+    height: 410px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    border-radius: 5px;
+    gap: 1px;
+    padding: 5px;
+    border: 4px solid #8CB5A8;
+    background: #F8FAF9;
+}
+
+.puzzle-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 100px;
+    max-width: 100px;
+    background: #F8FAF9;
+}
+
+.drop-zone.active-zone:empty {
+    border: 1px dashed #8CB5A8;
+}
+
+.puzzle-mixed {
+    margin: 0 auto;
+    display: flex;
+    max-width: 1000px;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 150px;
+    border: 4px solid #8CB5A8;
+    background: #F8FAF9;
+}
+
+.part {
+    margin: 14px;
+}
+
+.part > img {
+    display: block;
+    width: 100px;
+    box-shadow: 0 0 0 1px #8CB5A8;
+}
+
+.button-puzzle {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+    color: black;
+    font-size: 2rem;
+}

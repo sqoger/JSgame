@@ -1,4 +1,4 @@
-.grid {
+.grid-memory {
     display: flex;
     flex-wrap: wrap;
     height:600px;
@@ -24,4 +24,12 @@ img {
 
 h1{
     font-family: 'Mukta', sans-serif;
+    color: white;
 }
+
+
+body {
+    background-color: black;
+}
+
+

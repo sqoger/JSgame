@@ -2,17 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Game</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'style-puzzle.css') }}">
+    <title>Puzzle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
     <script src="static/puzzle.js" defer></script>
 </head>
 <body>
+
+<div class="top">
+<button class="rules" id="myBtn">Rules</button>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+      <p>Use arrows to change direction.</p>
+      <p>Collect apples to expand your snake.</p>
+      <p>Don't run into the wall or the snake's body.</p>
+  </div>
+
+</div>
+
+    <span id="score"></span>
+    <span class="right"><a href="/">MAIN PAGE</a></span>
+</div>
+
     <div class="text">Puzzle game</div><br>
     <div class="time text">time:
         <span id="minutes">00</span>:<span id="seconds">00</span>
     </div><br>
     <div class="position">
-        <button class="button" onclick="startCounting()">Start</button>
+        <button class="button-puzzle" onclick="startCounting()">Start</button>
     </div>
 
     <div class="game">
