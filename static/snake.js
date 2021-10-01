@@ -13,7 +13,7 @@ function main(currentTime) {
     document.getElementById("score").innerHTML = ("Score: " + score);
     if(gameOver) {
         if(confirm("Score: " + score + "\nPress 'OK' to play again.")) {
-            location.reload()
+            window.location.reload() // TODO figure out why this isn't working
         }
     }
     window.requestAnimationFrame(main);
@@ -82,18 +82,17 @@ function onSnake(position, {ignoreHead = false} = {}) {
 }
 
 function updateBoard() {
-    updateSnake()
-    updateFood()
-    gameOver = outsideGrid(snakeBody[0]) || onSnake(snakeBody[0], {ignoreHead: true})
-    gameBoard.innerHTML = ''
-    putSnakeOnBoard(gameBoard)
-    putAppleOnBoard(gameBoard)
+    updateSnake();
+    updateFood();
+    gameOver = outsideGrid(snakeBody[0]) || onSnake(snakeBody[0], {ignoreHead: true});
+    gameBoard.innerHTML = '';
+    putSnakeOnBoard(gameBoard);
+    putAppleOnBoard(gameBoard);
 }
 
 function randomPosition() {
   return {
-    x: Math.floor(Math.random() * SIZE) + 1,
-    y: Math.floor(Math.random() * SIZE) + 1
+    x: Math.floor(Math.random() * SIZE) + 1, y: Math.floor(Math.random() * SIZE) + 1
   }
 }
 
