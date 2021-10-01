@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All pictures</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style-puzzle.css') }}">
+</head>
+<body>
+<div class="text">Choose a picture</div><br>
+<div class="all-pictures">
+    <a href="{{ url_for('puzzle_game', directory='car') }}" class="picture"><img src="/static/puzzle/all/car.jpg" alt="car"></a>
+    <a href="{{ url_for('puzzle_game', directory='cat') }}" class="picture"><img src="/static/puzzle/all/cat.jpg" alt="car"></a>
+    <a href="{{ url_for('puzzle_game', directory='letters') }}" class="picture"><img src="/static/puzzle/all/letters.jpg" alt="car"></a>
+    <a href="{{ url_for('puzzle_game', directory='swan') }}" class="picture"><img src="/static/puzzle/all/swan.jpg" alt="car"></a>
+    <a href="{{ url_for('puzzle_game', directory='parrot') }}" class="picture"><img src="/static/puzzle/all/parrot.jpg" alt="car"></a>
+    <a href="{{ url_for('puzzle_game', directory='zebra') }}" class="picture"><img src="/static/puzzle/all/zebra.jpg" alt="car"></a>
+</div>
+</body>
+</html>
