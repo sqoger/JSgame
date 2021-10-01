@@ -71,7 +71,6 @@ body {
 }
 
 .food {
-    background-image: url("apple.png");
     background-color: red;
     border-radius: 2rem;
 }
