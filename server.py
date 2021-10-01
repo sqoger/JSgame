@@ -19,10 +19,14 @@ def memory_game():
     return render_template('memory.html')
 
 
-@app.route('/puzzle')
-def puzzle_game():
-    directory = "cat"
+@app.route('/puzzle/<directory>')
+def puzzle_game(directory):
     return render_template('puzzle.html', directory=directory)
+
+
+@app.route('/puzzle')
+def all_pictures():
+    return render_template('all-pictures.html')
 
 
 if __name__ == "__main__":

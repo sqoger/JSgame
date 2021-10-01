@@ -30,6 +30,10 @@ function initDragAndDrop() {
 function dragStartHandler(e) {
     this.classList.add("dragged");
     setDropZonesHighlight(true);
+    if (timeCounter.on === false) {
+        timeCounter.startCounting();
+    }
+    timeCounter.on = true;
 }
 
 
@@ -81,8 +85,13 @@ function canDropHere(e) {
 function hasWon() {
     if (checkIsBoxEmpty()) {
         if (arePositionsCorrect()) {
-            alert("You won!");
+            var name = prompt("You won! Time: " + minutes.innerHTML + ":" + seconds.innerHTML +
+                " Please enter your name/nick t save result: ");
+            if (name) {
+                saveResult(name);
+            }
             endCounting();
+            playAgainButton();
         }
     }
 }
@@ -115,9 +124,13 @@ let minutes = document.querySelector("#minutes");
 let totalSeconds = 0;
 let counting;
 
-function startCounting() {
-    counting = setInterval(setTime, 1000);
+let timeCounter = {
+    on: false,
+    startCounting() {
+        counting = setInterval(setTime, 1000);
+    }
 }
+
 
 function setTime() {
     ++totalSeconds;
@@ -137,9 +150,45 @@ function convertIntoString(value) {
 }
 
 function endCounting() {
-    clearInterval(counting)
+    clearInterval(counting);
 }
 
+function saveResult(name) {
+    let scoresList = document.querySelector("#scores-list");
+    let paragraph = document.createElement("p");
+    let content = document.createTextNode(name + ": " + minutes.innerHTML + ":" + seconds.innerHTML);
+    paragraph.appendChild(content);
+    paragraph.classList.add("text");
+    paragraph.classList.add("each-score")
+    scoresList.appendChild(paragraph);
+}
+
+function playAgainButton() {
+    let div = document.querySelector(".button-position");
+    let button = document.createElement("button");
+    button.classList.add("button-puzzle");
+    button.setAttribute("onclick", "playAgain()");
+    let content = document.createTextNode("Play again");
+    button.appendChild(content);
+    div.appendChild(button);
+}
+
+
+function playAgain() {
+    seconds.innerHTML = "00";
+    minutes.innerHTML = "00";
+    totalSeconds = 0;
+    timeCounter.on = false;
+    let draggables = document.querySelectorAll(".part");
+    let puzzleMixed = document.querySelector(".puzzle-mixed");
+    for (let draggable of draggables) {
+        puzzleMixed.appendChild(draggable);
+    }
+    shuffleCards();
+    let div = document.querySelector(".button-position");
+    let button = document.querySelector(".button-puzzle");
+    div.removeChild(button);
+}
 
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");

@@ -1,13 +1,13 @@
 .text {
     font-family: 'Lucida Console', sans-serif;
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     color: #2E483F;
 }
 
 .time {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .puzzle-board {
@@ -74,10 +74,49 @@
   border-radius: 50%;
 }
 
-.position {
+.button-position {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.scores {
+    font-size: 20px;
+    text-align: left;
+}
+
+.each-score {
+    font-size: 15px;
+    text-align: left;
+}
+
+.all-pictures {
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    width: 850px;
+    height: 550px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    border-radius: 5px;
+    gap: 1px;
+    padding: 5px;
+    border: 4px solid #8CB5A8;
+    background: #F8FAF9;
+}
+
+
+.picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F8FAF9;
+}
+
+.picture > img {
+    width: 250px;
+    box-shadow: 0 0 0 3px #8CB5A8;
 }
 
 
