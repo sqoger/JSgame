@@ -58,6 +58,7 @@ function getInputDirection() {
 }
 
 // updates the snake's body by expanding it by any new segments, resetting the number of new segments,
+// checking the direction in which the snake is moving and moving the snake by 1 in the given direction
 function updateSnake() {
     for(let i = 0; i < newSegments; i++) {
        snakeBody.push({...snakeBody[snakeBody.length - 1]})
@@ -94,6 +95,7 @@ function onSnake(position, {ignoreHead = false} = {}) {
 function updateBoard() {
     updateSnake();
     updateFood();
+    // the game is over when the snake runs into the wall or into its own body
     gameOver = outsideGrid(snakeBody[0]) || onSnake(snakeBody[0], {ignoreHead: true});
     gameBoard.innerHTML = '';
     putSnakeOnBoard(gameBoard);
