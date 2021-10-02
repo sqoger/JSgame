@@ -125,15 +125,18 @@ function putAppleOnBoard(gameBoard) {
         gameBoard.appendChild(apple);
 }
 
-let modal = document.getElementById("myModal");
-let btn = document.getElementById("myBtn");
+// modal window with rules of the game
+let modal = document.getElementById("modal");
+let btn = document.getElementById("modal-button");
 let span = document.getElementsByClassName("close")[0];
 btn.onclick = function() {
   modal.style.display = "block";
 }
+
 span.onclick = function() {
   modal.style.display = "none";
 }
+
 window.onclick = function(event) {
   if (event.target === modal) {
     modal.style.display = "none";

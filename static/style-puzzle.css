@@ -60,8 +60,18 @@
     box-shadow: 0 0 0 1px #8CB5A8;
 }
 
+.rules {
+    padding: 0.5rem;
+    color: blue;
+    background-color: yellow;
+    border: 1px solid black;
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+}
+
+
 .button-puzzle {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 20px;
