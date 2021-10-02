@@ -92,6 +92,7 @@ function onSnake(position, {ignoreHead = false} = {}) {
 }
 
 // updates the board by updating both the snake and the apple, checking for game over,
+// then resetting the board and placing the snake and the apple in their new positions
 function updateBoard() {
     updateSnake();
     updateFood();
