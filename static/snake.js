@@ -1,13 +1,19 @@
-const SIZE = 20
+const BOARD_SIZE = 20
 let gameOver = false
 const gameBoard = document.getElementById('game-board')
 let speed = 5
 let direction = {x: 0, y: 0}
 let lastDirection = {x: 0, y: 0}
-const snakeBody = [{x: 10, y: 10}]
+let snakeBody = [{x: 10, y: 10}]
+let food = getRandomFoodPosition()
 let newSegments = 0
 let lastRenderTime = 0
 
+// initializes the game loop
+window.requestAnimationFrame(main)
+
+// main game loop: updates the score, checks for game over and if true displays a popup allowing to restart,
+// requests the animation frame, and updates the board every second
 function main(currentTime) {
     let score = snakeBody.length - 1
     document.getElementById("score").innerHTML = ("Score: " + score);
@@ -23,8 +29,7 @@ function main(currentTime) {
     updateBoard()
 }
 
-window.requestAnimationFrame(main)
-
+// listens for when user presses an arrow key
 window.addEventListener('keydown', event => {
     switch (event.key) {
         case 'ArrowLeft':
@@ -46,11 +51,13 @@ window.addEventListener('keydown', event => {
     }
 })
 
+// updates the direction in which the snake is moving
 function getInputDirection() {
     lastDirection = direction
     return direction
 }
 
+// updates the snake's body by expanding it by any new segments, resetting the number of new segments,
 function updateSnake() {
     for(let i = 0; i < newSegments; i++) {
        snakeBody.push({...snakeBody[snakeBody.length - 1]})
@@ -64,6 +71,7 @@ function updateSnake() {
     snakeBody[0].y += inputDirection.y
 }
 
+// displays the snake on board
 function putSnakeOnBoard(gameBoard) {
     snakeBody.forEach(element => {
         const snakeElement = document.createElement('div');
@@ -74,6 +82,7 @@ function putSnakeOnBoard(gameBoard) {
     })
 }
 
+// checks if an element is on the snake's body
 function onSnake(position, {ignoreHead = false} = {}) {
     return snakeBody.some((segment, index) => {
         if(ignoreHead && index === 0) return false
@@ -81,6 +90,7 @@ function onSnake(position, {ignoreHead = false} = {}) {
     } )
 }
 
+// updates the board by updating both the snake and the apple, checking for game over,
 function updateBoard() {
     updateSnake();
     updateFood();
@@ -90,16 +100,19 @@ function updateBoard() {
     putAppleOnBoard(gameBoard);
 }
 
+// selects a random x and y inside the board
 function randomPosition() {
   return {
-    x: Math.floor(Math.random() * SIZE) + 1, y: Math.floor(Math.random() * SIZE) + 1
+    x: Math.floor(Math.random() * BOARD_SIZE) + 1, y: Math.floor(Math.random() * BOARD_SIZE) + 1
   }
 }
 
+// checks if the element is outside the game board
 function outsideGrid(position) {
-  return position.x < 1 || position.x > SIZE || position.y < 1 || position.y > SIZE
+  return position.x < 1 || position.x > BOARD_SIZE || position.y < 1 || position.y > BOARD_SIZE
 }
 
+// selects a random new position for the apple which is not on the snake's body
 function getRandomFoodPosition() {
   let newPosition = null
   while (newPosition == null || onSnake(newPosition)) {
@@ -108,7 +121,8 @@ function getRandomFoodPosition() {
   return newPosition
 }
 
-let food = getRandomFoodPosition()
+// when the snake collects the apple, expand snake by 1 segment and increase its speed,
+// then get a new position for the apple
 function updateFood() {
     if(onSnake(food)) {
         newSegments += 1
@@ -117,6 +131,7 @@ function updateFood() {
     }
 }
 
+// displays the apple element on the board
 function putAppleOnBoard(gameBoard) {
         const apple = document.createElement('div');
         apple.style.gridRowStart = food.y;
@@ -127,16 +142,20 @@ function putAppleOnBoard(gameBoard) {
 
 // modal window with rules of the game
 let modal = document.getElementById("modal");
-let btn = document.getElementById("modal-button");
+let button = document.getElementById("modal-button");
 let span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
+
+// display modal
+button.onclick = function() {
   modal.style.display = "block";
 }
 
+// close modal by clicking the x
 span.onclick = function() {
   modal.style.display = "none";
 }
 
+// close modal by clicking anywhere outside of it
 window.onclick = function(event) {
   if (event.target === modal) {
     modal.style.display = "none";
